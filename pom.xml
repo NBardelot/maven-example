@@ -9,6 +9,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>POM parent</name>
 	<packaging>pom</packaging>
+	
+	<scm>
+		<url>https://github.com/NBardelot/maven-example.git</url>
+		<connection>scm:git:https://github.com/NBardelot/maven-example.git</connection>
+		<developerConnection>scm:git:https://github.com/NBardelot/maven-example.git</developerConnection>
+	</scm>
 
 	<!-- On déclare dans le parent les modules dans l'ordre où il faut les compiler, 
 		car ils peuvent dépendre les uns des autres. Attention aux dépendances cycliques 
