@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>fr.soat.formation</groupId>
+		<artifactId>maven-example-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>maven-example-web</artifactId>
+	<packaging>war</packaging>
+	<name>Webapp</name>
+	<url>http://example.soat.fr</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet-api.version}</version>
+			<!-- l'API JEE est fournie par le conteneur inutile de l'embarquer par 
+				contre il faut mentionner qu'on en a besoin -->
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Notre webapp utilise notre bibliothèque technique -->
+		<dependency>
+			<groupId>fr.soat.formation</groupId>
+			<artifactId>maven-example-libtech</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- le nom qu'on veut pour le WAR produit -->
+		<finalName>maven-example</finalName>
+
+		<!-- Ici on ne veut filtrer que les fichier properties ou xml, et en particulier 
+			il ne faut jamais filtrer des fichiers binaires -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.jpeg</exclude>
+					<exclude>**/*.png</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+
+	<!-- Les profils vont nous permettre de construire le WAR de deux manières 
+		différentes. Ici on active un profil ou l'autre en ajoutant -Dconfig=debug 
+		ou -Dconfig=nominal sur la ligne de commande Maven, et si on ne met rien 
+		c'est le profil par défaut qui est utilisé.
+		
+		Dans le cas présent ça va nous servir à ajouter des informations supplémentaires
+		que le développeur peut utiliser pour debuguer l'application sur son poste par
+		exemple, mais ces infos ne seront pas incluses par défaut.
+		
+		Les sections <build> ci-dessous se rapportent à la section <resources> qu'on a vu
+		un peu plus haut. Ce sont ces ressources qui seront "filtrées" avec les variables remplacées
+		par leurs valeurs finales, avant qu'elles soient mises dans le WAR. -->
+	<profiles>
+		<profile>
+			<id>debug</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>config</name>
+					<value>debug</value>
+				</property>
+			</activation>
+			<build>
+				<!-- Pour ce profil on va prendre les valeurs qu'il faut mettre dans 
+					les ressources depuis les filtres qui sont spécifiés ici. -->
+				<filters>
+					<filter>src/main/filters/filtre-debug.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>nominal</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>config</name>
+					<value>nominal</value>
+				</property>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/filters/filtre-nominal.properties</filter>
+				</filters>
+			</build>
+		</profile>
+	</profiles>
+</project>
