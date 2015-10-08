@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- Notez que le groupe et la version du POM parent seront hérités par 
 		les modules s'ils sont omis dans leurs POM. Cela permet de limiter le nombre 
@@ -13,8 +14,8 @@
 		<url>https://github.com/NBardelot/maven-example.git</url>
 		<connection>scm:git:https://github.com/NBardelot/maven-example.git</connection>
 		<developerConnection>scm:git:https://github.com/NBardelot/maven-example.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<!-- On déclare dans le parent les modules dans l'ordre où il faut les compiler, 
 		car ils peuvent dépendre les uns des autres. Attention aux dépendances cycliques 
@@ -67,9 +68,9 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- On dit au plugin Release d'utiliser un client Git
-			     sous forme de plugin Maven pour éviter les problèmes
-			     liés à la portabilité et à la configuration système. -->
+			<!-- On dit au plugin Release d'utiliser un client Git sous forme de plugin 
+				Maven pour éviter les problèmes liés à la portabilité et à la configuration 
+				système. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
