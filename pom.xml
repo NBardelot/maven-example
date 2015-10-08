@@ -5,7 +5,7 @@
 		de n° de version à gérer. -->
 	<groupId>fr.soat.formation</groupId>
 	<artifactId>maven-example-parent</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>POM parent</name>
 	<packaging>pom</packaging>
 
@@ -13,7 +13,7 @@
 		<url>https://github.com/NBardelot/maven-example.git</url>
 		<connection>scm:git:https://github.com/NBardelot/maven-example.git</connection>
 		<developerConnection>scm:git:https://github.com/NBardelot/maven-example.git</developerConnection>
-		<tag>maven-example-parent-0.0.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<!-- On déclare dans le parent les modules dans l'ordre où il faut les compiler, 
